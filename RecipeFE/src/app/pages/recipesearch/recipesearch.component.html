@@ -1,0 +1,22 @@
+<h2 class="text-3xl font-bold underline">recipesearch works!</h2>
+
+<button (click)="searchRecipe()">Get recipes</button>
+
+@for (recipe of recipes; track recipe) {
+<article>
+  <h3>{{ recipe.label }}</h3>
+  <img src="{{ recipe.image }}" />
+  <p>{{ recipe.totalTime }}</p>
+
+  <p>
+    <a [routerLink]="['/recipes', recipe.self | idformatter]">Read recipe...</a>
+  </p>
+  <ul>
+    @for (ingredientLine of recipe.ingredientLines; track ingredientLine) {
+    <li>{{ ingredientLine }}</li>
+    }
+  </ul>
+</article>
+} @empty {
+<p>There are no recipes...</p>
+}
