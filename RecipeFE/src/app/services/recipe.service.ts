@@ -19,9 +19,11 @@ export class RecipeService {
 
   constructor(private http: HttpClient) {}
 
-  getRecipes(searchterm: string): Observable<any> {
-    let quisineType = 'Middle Eastern'; //could be sent as parameter
-    let mealType = 'Lunch'; //could be sent as parameter
+  getRecipes(
+    searchterm = 'Chicken',
+    cuisineType = 'Middle Eastern',
+    mealType = 'Dinner'
+  ): Observable<any> {
     let url =
       this.configUrl +
       '&q=' +
@@ -31,7 +33,7 @@ export class RecipeService {
       '&app_key=' +
       this.app_key +
       '&cuisineType=' +
-      quisineType +
+      cuisineType +
       '&mealType=' +
       mealType;
     return this.http.get<any>(url, this.httpOptions);

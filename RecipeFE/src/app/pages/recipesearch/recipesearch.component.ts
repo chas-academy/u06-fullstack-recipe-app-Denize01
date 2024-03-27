@@ -1,37 +1,48 @@
 import { Component } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { filter, map } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { IdformatterPipe } from './idformatter.pipe';
+import { FormsModule } from '@angular/forms';
+import { Recipe } from '../../interfaces/recipe';
 
 @Component({
   selector: 'app-recipesearch',
   standalone: true,
-  imports: [RouterLink, IdformatterPipe],
+  imports: [RouterLink, IdformatterPipe, FormsModule],
   templateUrl: './recipesearch.component.html',
   styleUrl: './recipesearch.component.css',
 })
 export class RecipesearchComponent {
-  recipes?: any;
+  recipes?: Recipe[];
+
+  searchterm = '';
 
   constructor(private recipeService: RecipeService) {}
 
   searchRecipe() {
-    this.recipeService.getRecipes('chicken').subscribe((res) => {
+    this.recipeService.getRecipes(this.searchterm).subscribe((res) => {
       console.log(res);
-      let recipeArray: any[];
-      recipeArray = res.hits;
-      console.log(recipeArray);
+      let recipes: Recipe[];
 
-      let recipes = recipeArray.map((item) => {
-        return {
-          self: item._links.self.href,
-          label: item.recipe.label,
-          image: item.recipe.image,
-          totalTime: item.recipe.totalTime,
-          ingredientLines: item.recipe.ingredientLines,
-        };
-      });
+      recipes = res.hits.map(
+        (item: {
+          recipe: {
+            label: any;
+            image: any;
+            ingredientLines: any;
+            totalTime: any;
+          };
+          _links: { self: { href: any } };
+        }) => {
+          return {
+            label: item.recipe.label,
+            image: item.recipe.image,
+            totalTime: item.recipe.totalTime,
+            ingredientLines: item.recipe.ingredientLines,
+            selfhref: item._links.self.href,
+          };
+        }
+      );
 
       console.table(recipes);
       this.recipes = recipes;

@@ -1,17 +1,21 @@
 <h2 class="text-3xl font-bold underline">recipesearch works!</h2>
 
+<input class="border-2" type="text" [(ngModel)]="searchterm" />
+
 <button (click)="searchRecipe()">Get recipes</button>
 
 @for (recipe of recipes; track recipe) {
 <article>
-  <h3>{{ recipe.label }}</h3>
-  <img src="{{ recipe.image }}" />
-  <p>{{ recipe.totalTime }}</p>
+  <h3 class="text-3xl font-bold underline">{{ recipe.label }}</h3>
+  <img src="{{ recipe.image }}" alt="Recipe image" />
+  <p>{{ recipe.totaltime }}</p>
+  <p>{{ recipe.selfref }}</p>
 
-  <p>
-    <a [routerLink]="['/recipes', recipe.self | idformatter]">Read recipe...</a>
-  </p>
   <ul>
+    <!-- <p>
+    <a [routerLink]="['/recipes', recipe.self | idformatter]">Read recipe...</a>
+  </p> -->
+
     @for (ingredientLine of recipe.ingredientLines; track ingredientLine) {
     <li>{{ ingredientLine }}</li>
     }

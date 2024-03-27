@@ -22,6 +22,8 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'RecipeFE';
 
+  user?: User;
+
   loginDetails: LoginDetails;
 
   loggedIn$: Observable<boolean>;
@@ -30,6 +32,12 @@ export class AppComponent {
     this.loginDetails = {
       email: 'den@den.den',
       password: 'denden',
+    };
+
+    this.user = {
+      id: 11,
+      name: 'Denize',
+      email: 'den@den.den',
     };
 
     this.loggedIn$ = this.auth.loggedIn$;

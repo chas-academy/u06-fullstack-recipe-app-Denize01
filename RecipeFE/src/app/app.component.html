@@ -1,10 +1,11 @@
+<h1>My Angular project RecipeFE</h1>
+<br /><br />
 <p>{{ loggedIn$ | async }}</p>
 
-<button (click)="login()">Login</button>
+<button (click)="login()">Login</button><br />
+
 <button (click)="logout()">Logout</button>
-<!-- <button (click)="getUser()">Get a user</button> -->
-<!-- <p>{{ user.name }}</p>
-<p>{{ user.email }}</p> -->
+<br /><br />
 
 <nav>
   <ul>
@@ -16,6 +17,7 @@
         >Search</a
       >
     </li>
+    <br /><br />
     <li>
       <a
         routerLink="/recipe"
@@ -24,6 +26,7 @@
         >Recipe</a
       >
     </li>
+    <br /><br />
     <li>
       <a
         routerLink="/profile"
@@ -32,6 +35,8 @@
         >Profile</a
       >
     </li>
+    <br /><br />
   </ul>
 </nav>
-<router-outlet></router-outlet>
+
+<router-outlet />
