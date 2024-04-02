@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { RouterLink } from '@angular/router';
-import { IdformatterPipe } from './idformatter.pipe';
 import { FormsModule } from '@angular/forms';
 import { Recipe } from '../../interfaces/recipe';
+import { RecipeidformatterPipe } from '../../pipes/recipeidformatter.pipe';
 
 @Component({
   selector: 'app-recipesearch',
   standalone: true,
-  imports: [RouterLink, IdformatterPipe, FormsModule],
+  imports: [RouterLink, RecipeidformatterPipe, FormsModule],
   templateUrl: './recipesearch.component.html',
   styleUrl: './recipesearch.component.css',
 })
@@ -39,7 +39,7 @@ export class RecipesearchComponent {
             image: item.recipe.image,
             totalTime: item.recipe.totalTime,
             ingredientLines: item.recipe.ingredientLines,
-            selfhref: item._links.self.href,
+            selfref: item._links.self.href,
           };
         }
       );

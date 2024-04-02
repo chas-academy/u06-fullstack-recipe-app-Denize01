@@ -2,6 +2,6 @@ export interface Recipe {
   label: string;
   image: string;
   ingredientLines: string;
-  totaltime: number;
+  totalTime: number;
   selfref: string;
 }

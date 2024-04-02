@@ -5,16 +5,17 @@ import { LoginDetails } from './interfaces/login-details';
 import { User } from './interfaces/user';
 import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { LoggedInUser } from './interfaces/logged-in-user';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    AsyncPipe,
     CommonModule,
     RouterLink,
     RouterLinkActive,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -26,7 +27,7 @@ export class AppComponent {
 
   loginDetails: LoginDetails;
 
-  loggedIn$: Observable<boolean>;
+  loggedIn$: Observable<LoggedInUser>;
 
   constructor(private auth: AuthService) {
     this.loginDetails = {
@@ -34,20 +35,6 @@ export class AppComponent {
       password: 'denden',
     };
 
-    this.user = {
-      id: 11,
-      name: 'Denize',
-      email: 'den@den.den',
-    };
-
     this.loggedIn$ = this.auth.loggedIn$;
-  }
-
-  login() {
-    this.auth.loginUser(this.loginDetails);
-  }
-
-  logout() {
-    this.auth.logOut();
   }
 }

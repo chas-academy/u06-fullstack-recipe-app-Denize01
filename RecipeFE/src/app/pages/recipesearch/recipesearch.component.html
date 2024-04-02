@@ -8,13 +8,15 @@
 <article>
   <h3 class="text-3xl font-bold underline">{{ recipe.label }}</h3>
   <img src="{{ recipe.image }}" alt="Recipe image" />
-  <p>{{ recipe.totaltime }}</p>
-  <p>{{ recipe.selfref }}</p>
+  <p>{{ recipe.totalTime }}</p>
+  <!-- <p>{{ recipe.selfref }}</p> -->
 
   <ul>
-    <!-- <p>
-    <a [routerLink]="['/recipes', recipe.self | idformatter]">Read recipe...</a>
-  </p> -->
+    <p>
+      <a [routerLink]="['/recipe', recipe.selfref | recipeidformatter]"
+        >Read this recipe...</a
+      >
+    </p>
 
     @for (ingredientLine of recipe.ingredientLines; track ingredientLine) {
     <li>{{ ingredientLine }}</li>

@@ -14,16 +14,14 @@ export class ProfileComponent {
 
   constructor(private auth: AuthService) {
     this.user = {
-      id: -1,
+      id: 0,
       name: '',
       email: '',
+      created_at: '',
     };
   }
 
   getUser() {
-    this.auth.getUser2().subscribe((res) => {
-      console.log(res[0]);
-      this.user = res[0];
-    });
+    this.auth.getCurrentUser();
   }
 }

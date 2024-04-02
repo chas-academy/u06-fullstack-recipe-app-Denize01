@@ -5,20 +5,33 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginDetails } from '../interfaces/login-details';
-import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  EMPTY,
+  Observable,
+  catchError,
+  throwError,
+  map,
+} from 'rxjs';
 import { User } from '../interfaces/user';
-
-interface ResultData {
-  token: string;
-}
-
-interface RegisterDetails {}
+import { LoggedInUser } from '../interfaces/logged-in-user';
+import { RegisteredUser } from '../interfaces/registered-user';
+import { Registerdetails } from '../interfaces/registerdetails';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private registered = new BehaviorSubject<RegisteredUser>({
+    user: undefined,
+    registeredState: false,
+  });
+  registered$ = this.registered.asObservable();
+
+  private loggedIn = new BehaviorSubject<LoggedInUser>({
+    user: undefined,
+    loginState: false,
+  });
   loggedIn$ = this.loggedIn.asObservable();
 
   private configUrl = 'http://127.0.0.1:8000/api/';
@@ -31,24 +44,45 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getLoginStatus() {
-    return this.loggedIn.value;
+  registeredUserState(registeredState: RegisteredUser) {
+    this.registered.next(registeredState);
   }
-  private updateLoginState(loginState: boolean) {
+
+  registerNewUser(registerdetails: Registerdetails) {
+    this.http
+      .post<any>(this.configUrl + 'register', registerdetails, this.httpOptions)
+      .pipe(catchError(this.handleError))
+      .subscribe((result) => {
+        console.log(result);
+        this.registeredUserState({
+          user: result.user,
+          registeredState: true,
+        });
+
+        this.httpOptions.headers = this.httpOptions.headers.set(
+          'Authorization',
+          'Bearer ' + result.token
+        );
+      });
+  }
+
+  private updateLoginState(loginState: LoggedInUser) {
     this.loggedIn.next(loginState);
+  }
+  getLoginStatus() {
+    return this.loggedIn.value.loginState;
   }
 
   loginUser(loginDetails: LoginDetails) {
     this.http
-      .post<ResultData>(
-        this.configUrl + 'login',
-        loginDetails,
-        this.httpOptions
-      )
+      .post<any>(this.configUrl + 'login', loginDetails, this.httpOptions)
       .pipe(catchError(this.handleError))
       .subscribe((result) => {
         console.log(result);
-        this.updateLoginState(true);
+        this.updateLoginState({
+          user: result.user,
+          loginState: true,
+        });
         this.httpOptions.headers = this.httpOptions.headers.set(
           'Authorization',
           'Bearer ' + result.token
@@ -58,11 +92,14 @@ export class AuthService {
 
   logOut() {
     this.http
-      .post<ResultData>(this.configUrl + 'logout', {}, this.httpOptions)
+      .post<any>(this.configUrl + 'logout', {}, this.httpOptions)
       .pipe(catchError(this.handleError))
       .subscribe((result) => {
         console.log(result);
-        this.updateLoginState(false);
+        this.updateLoginState({
+          user: result.user,
+          loginState: false,
+        });
         this.httpOptions.headers = this.httpOptions.headers.set(
           'Authorization',
           'Bearer '
@@ -70,11 +107,20 @@ export class AuthService {
       });
   }
 
-  getUser2(): Observable<User[]> {
-    return this.http.get<User[]>(
-      this.configUrl + 'getuser/2',
-      this.httpOptions
-    );
+  getCurrentUser(): Observable<User> {
+    if (!this.loggedIn.value.user) {
+      return EMPTY;
+    }
+
+    return this.http
+      .get<User[]>(
+        this.configUrl + 'getUser/' + this.loggedIn.value.user?.id,
+        this.httpOptions
+      )
+      .pipe(
+        map((users) => users[0]),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {

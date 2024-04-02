@@ -38,6 +38,9 @@ export class RecipeService {
       mealType;
     return this.http.get<any>(url, this.httpOptions);
   }
+  getRecipe(id: string) {
+    console.log(id);
+  }
 }
 
 // curl -X 'GET' \
