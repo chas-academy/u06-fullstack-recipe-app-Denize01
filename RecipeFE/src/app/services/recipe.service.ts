@@ -38,8 +38,11 @@ export class RecipeService {
       mealType;
     return this.http.get<any>(url, this.httpOptions);
   }
-  getRecipe(id: string) {
-    console.log(id);
+  getRecipe(recipeId: string): Observable<any> {
+    let recipeUrl = `https://api.edamam.com/api/recipes/v2/`;
+    let URL = `${recipeUrl}${recipeId}?type=public&app_id=${this.app_id}&app_key=${this.app_key}`;
+    // console.log(id);
+    return this.http.get<any>(URL, this.httpOptions);
   }
 }
 

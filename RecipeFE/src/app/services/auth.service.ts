@@ -114,7 +114,7 @@ export class AuthService {
 
     return this.http
       .get<User[]>(
-        this.configUrl + 'getUser/' + this.loggedIn.value.user?.id,
+        this.configUrl + 'getuser/' + this.loggedIn.value.user?.id,
         this.httpOptions
       )
       .pipe(

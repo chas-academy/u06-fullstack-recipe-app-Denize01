@@ -1,47 +1,29 @@
 <nav>
   <ul class="flex flex-row justify-between">
+    <!-- Recipe Search Link -->
     <li>
-      <a
-        routerLink="/search"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >Search</a
+      <a routerLink="/search" routerLinkActive="active" aria-current="page"
+        >Recipe Search</a
       >
     </li>
 
-    <br />
+    <!-- Profile Link -->
     <li>
-      <a
-        routerLink="/recipe/:id"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >Recipe</a
-      >
-    </li>
-    <br />
-    <li>
-      <a
-        routerLink="/profile"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
+      <a routerLink="/profile" routerLinkActive="active" aria-current="page"
         >Profile</a
       >
     </li>
 
+    <!-- Login Link -->
     <li>
-      <a
-        routerLink="/login"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
+      <a routerLink="/login" routerLinkActive="active" aria-current="page"
         >Login</a
       >
     </li>
 
+    <!-- Register Link -->
     <li>
-      <a
-        routerLink="/register"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
+      <a routerLink="/register" routerLinkActive="active" aria-current="page"
         >Register</a
       >
     </li>
@@ -54,10 +36,15 @@
     }
   </ul>
 </nav>
-<br /><br /><br />
+
+<!-- User Authentication Status -->
 <h1>My Angular project RecipeFE</h1>
-<br /><br />
-<footer>
-  <h4>skapa en footer här</h4>
-</footer>
+<br />
+
+<!-- Router Outlet for Navigating Pages -->
 <router-outlet />
+
+<!-- Footer -->
+<footer>
+  <h4>Create a footer here</h4>
+</footer>

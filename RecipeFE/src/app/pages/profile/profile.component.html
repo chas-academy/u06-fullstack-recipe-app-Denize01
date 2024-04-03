@@ -1,4 +1,10 @@
 <p>profile works!</p>
 
-<!-- <button (click)="getUser()">Get a user</button>
-<p>{{ user.name }}</p> -->
+@if (currentUser$ | async; as currentUser) {
+<div>
+  <p>{{ currentUser.name }}</p>
+  <p>{{ currentUser.email }}</p>
+</div>
+} @else {
+<p>Loading...</p>
+}
