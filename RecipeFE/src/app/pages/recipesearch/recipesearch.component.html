@@ -1,9 +1,39 @@
-<h2 class="text-3xl font-bold underline">recipesearch works!</h2>
+<h2 class="text-2xl font-bold underline">Search for your favourite recipes!</h2>
 
-<input class="border-2" type="text" [(ngModel)]="searchterm" />
+<div class="flex justify-center my-4">
+  <input class="border-2" type="text" [(ngModel)]="filter.query" />
 
-<button (click)="searchRecipe()">Get recipes</button>
+  <button (click)="searchRecipe()">Find recipes</button>
 
+  <select name="dishTypes" [(ngModel)]="filter.dishTypes" class="mx-4">
+    <option value="">Type of dish</option>
+    <option value="Bread">Bread</option>
+    <option value="Desserts">Dessert</option>
+    <option value="Salad">Salad</option>
+    <option value="Starter">Starter</option>
+    <option value="Soup">Soup</option>
+    <option value="Side_Dish">Side Dish</option>
+  </select>
+
+  <select name="mealTypes" [(ngModel)]="filter.mealTypes" class="mx-4">
+    <option value="">Type of meal</option>
+    <option value="breakfast">Breakfast</option>
+    <option value="lunch">Lunch</option>
+    <option value="Dinner">Dinner</option>
+  </select>
+
+  <select name="health" [(ngModel)]="filter.health">
+    <option value="">Diet</option>
+    <option value="alcohol-free">Alcohol free</option>
+    <option value="dairy-free">Lactose free</option>
+    <option value="egg-free">Egg free</option>
+    <option value="fish-free">Fish free</option>
+    <option value="peanut-free">Peanut free</option>
+    <option value="wheat-free">Gluten free</option>
+    <option value="vegan">Vegan</option>
+    <option value="vegetarian">Vegetarian</option>
+  </select>
+</div>
 @for (recipe of recipes; track recipe) {
 <article>
   <h3 class="text-3xl font-bold underline">{{ recipe.label }}</h3>

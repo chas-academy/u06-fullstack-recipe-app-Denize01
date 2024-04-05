@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Recipe } from '../../interfaces/recipe';
 import { RecipeidformatterPipe } from '../../pipes/recipeidformatter.pipe';
+import { Filter } from '../../interfaces/filter';
 
 @Component({
   selector: 'app-recipesearch',
@@ -15,12 +16,18 @@ import { RecipeidformatterPipe } from '../../pipes/recipeidformatter.pipe';
 export class RecipesearchComponent {
   recipes?: Recipe[];
 
-  searchterm = '';
+  filter: Filter = {
+    query: '',
+    mealTypes: '',
+    health: '',
+    cuisineTypes: '',
+    dishTypes: '',
+  };
 
   constructor(private recipeService: RecipeService) {}
 
   searchRecipe() {
-    this.recipeService.getRecipes(this.searchterm).subscribe((res) => {
+    this.recipeService.getRecipes(this.filter).subscribe((res) => {
       console.log(res);
       let recipes: Recipe[];
 
