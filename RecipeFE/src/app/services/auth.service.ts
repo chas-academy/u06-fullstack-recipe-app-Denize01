@@ -34,7 +34,7 @@ export class AuthService {
   });
   loggedIn$ = this.loggedIn.asObservable();
 
-  private configUrl = 'http://127.0.0.1:8000/api/';
+  private configUrl = 'https://u06-fullstack-recipe-app-denize01.onrender.com/api/';
 
   private httpOptions = {
     headers: new HttpHeaders({
