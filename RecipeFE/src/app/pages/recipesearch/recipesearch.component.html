@@ -1,58 +1,93 @@
-<h2 class="text-2xl font-bold underline">Search for your favourite recipes!</h2>
+<main class="flex-grow container mx-auto px-4 py-8 bg-gray-100">
+  <h2 class="text-1xl text-cyan-700 font-semibold">
+    Search for your favourite recipes below!
+  </h2>
 
-<div class="flex justify-center my-4">
-  <input class="border-2" type="text" [(ngModel)]="filter.query" />
+  <div class="flex flex-wrap justify-center items-center md:flex-row">
+    <input
+      class="border-2"
+      type="text"
+      placeholder="Food for every mood"
+      [(ngModel)]="filter.query"
+    />
 
-  <button (click)="searchRecipe()">Find recipes</button>
+    <br /><br />
 
-  <select name="dishTypes" [(ngModel)]="filter.dishTypes" class="mx-4">
-    <option value="">Type of dish</option>
-    <option value="Bread">Bread</option>
-    <option value="Desserts">Dessert</option>
-    <option value="Salad">Salad</option>
-    <option value="Starter">Starter</option>
-    <option value="Soup">Soup</option>
-    <option value="Side_Dish">Side Dish</option>
-  </select>
+    <select
+      name="dishTypes"
+      [(ngModel)]="filter.dishTypes"
+      class="mx-4 shadow hover:shadow-lg"
+    >
+      <option value="">Type of dish</option>
+      <option value="Bread">Bread</option>
+      <option value="Desserts">Dessert</option>
+      <option value="Salad">Salad</option>
+      <option value="Starter">Starter</option>
+      <option value="Soup">Soup</option>
+      <option value="Side_Dish">Side Dish</option>
+    </select>
 
-  <select name="mealTypes" [(ngModel)]="filter.mealTypes" class="mx-4">
-    <option value="">Type of meal</option>
-    <option value="breakfast">Breakfast</option>
-    <option value="lunch">Lunch</option>
-    <option value="Dinner">Dinner</option>
-  </select>
+    <select
+      name="mealTypes"
+      [(ngModel)]="filter.mealTypes"
+      class="mx-4 shadow hover:shadow-lg"
+    >
+      <option value="">Type of meal</option>
+      <option value="breakfast">Breakfast</option>
+      <option value="lunch">Lunch</option>
+      <option value="Dinner">Dinner</option>
+    </select>
 
-  <select name="health" [(ngModel)]="filter.health">
-    <option value="">Diet</option>
-    <option value="alcohol-free">Alcohol free</option>
-    <option value="dairy-free">Lactose free</option>
-    <option value="egg-free">Egg free</option>
-    <option value="fish-free">Fish free</option>
-    <option value="peanut-free">Peanut free</option>
-    <option value="wheat-free">Gluten free</option>
-    <option value="vegan">Vegan</option>
-    <option value="vegetarian">Vegetarian</option>
-  </select>
-</div>
-@for (recipe of recipes; track recipe) {
-<article>
-  <h3 class="text-3xl font-bold underline">{{ recipe.label }}</h3>
-  <img src="{{ recipe.image }}" alt="Recipe image" />
-  <p>{{ recipe.totalTime }}</p>
-  <!-- <p>{{ recipe.selfref }}</p> -->
+    <select
+      name="health"
+      [(ngModel)]="filter.health"
+      class="mx-4 shadow hover:shadow-lg"
+    >
+      <option value="">Diet</option>
+      <option value="alcohol-free">Alcohol free</option>
+      <option value="dairy-free">Lactose free</option>
+      <option value="egg-free">Egg free</option>
+      <option value="fish-free">Fish free</option>
+      <option value="peanut-free">Peanut free</option>
+      <option value="wheat-free">Gluten free</option>
+      <option value="vegan">Vegan</option>
+      <option value="vegetarian">Vegetarian</option>
+    </select>
+  </div>
+  <br />
+  <button
+    (click)="searchRecipe()"
+    class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+  >
+    Find recipes
+  </button>
+  <div
+    class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+  >
+    @for (recipe of recipes; track recipe ) {
+    <article class="bg-blue-100 border-2 shadow-lg rounded-t-lg border-sky-600">
+      <h3 class="font-sans text-lg font-semibold underline">
+        {{ recipe.label }}
+      </h3>
+      <img src="{{ recipe.image }}" alt="Recipe image" />
+      <p>Total time: {{ recipe.totalTime }}</p>
 
-  <ul>
-    <p>
-      <a [routerLink]="['/recipe', recipe.selfref | recipeidformatter]"
-        >Read this recipe...</a
-      >
-    </p>
+      <ul>
+        <p>
+          <a
+            [routerLink]="['/recipe', recipe.selfref | recipeidformatter]"
+            class="flex justify-center bg-cyan-700 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mt-4"
+            >Go to this recipe!</a
+          >
+        </p>
 
-    @for (ingredientLine of recipe.ingredientLines; track ingredientLine) {
-    <li>{{ ingredientLine }}</li>
+        @for (ingredientLine of recipe.ingredientLines; track ingredientLine) {
+        <li>{{ ingredientLine }}</li>
+        }
+      </ul>
+    </article>
+    } @empty {
+    <p>There are no chosen recipes.</p>
     }
-  </ul>
-</article>
-} @empty {
-<p>There are no recipes...</p>
-}
+  </div>
+</main>

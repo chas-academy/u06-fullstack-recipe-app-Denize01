@@ -1,11 +1,15 @@
-<p>Reeeeeecipe works!</p>
+<br /><br />
+<p class="flex justify-center">This is where the magic happens!</p>
+<br /><br />
 
 @if (recipe) {
-<div>
-  <h2>{{ recipe.recipe.label }}</h2>
+<div class="shadow overflow-hidden rounded-lg">
+  <h2 class="underline">{{ recipe.recipe.label }}</h2>
   <img src="{{ recipe.recipe.images.SMALL.url }}" alt="Recipe image" />
-  <p>{{ recipe.recipe.totalTime }}</p>
+  <p class="font-semibold">Total time: {{ recipe.recipe.totalTime }}</p>
+  <p class="font-semibold">This is what you need:</p>
   @for (ingredientLine of recipe.recipe.ingredientLines; track ingredientLine) {
+
   <li>{{ ingredientLine }}</li>
   }
 </div>

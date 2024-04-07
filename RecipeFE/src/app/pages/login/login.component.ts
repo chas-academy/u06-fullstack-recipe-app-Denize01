@@ -25,4 +25,8 @@ export class LoginComponent {
   logout() {
     this.auth.logOut();
   }
+
+  // registerNewUser() {
+  //   this.auth.registerNewUser();
+  // }
 }

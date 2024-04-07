@@ -1,34 +1,37 @@
 <nav>
-  <ul class="flex flex-row justify-between">
+  <ul class="flex flex-row justify-around">
     <!-- Recipe Search Link -->
     <li>
-      <a routerLink="/search" routerLinkActive="active" aria-current="page"
+      <a
+        routerLink="/search"
+        routerLinkActive="active"
+        aria-current="page"
+        class="hover:bg-gray-200"
         >Recipe Search</a
       >
     </li>
 
     <!-- Profile Link -->
-    <li>
+    <!-- <li>
       <a routerLink="/profile" routerLinkActive="active" aria-current="page"
         >Profile</a
       >
-    </li>
+    </li> -->
 
     <!-- Login Link -->
-    <li>
+    <!-- <li>
       <a routerLink="/login" routerLinkActive="active" aria-current="page"
         >Login</a
       >
-    </li>
+    </li> -->
 
     <!-- Register Link -->
-    <li>
+    <!-- <li>
       <a routerLink="/register" routerLinkActive="active" aria-current="page"
         >Register</a
       >
-    </li>
+    </li> -->
 
-    <br />
     @if ((loggedIn$ | async)?.loginState) {
     <li>Logged in as {{ (loggedIn$ | async)?.user?.name }}</li>
     } @else {
@@ -37,9 +40,14 @@
   </ul>
 </nav>
 
-<!-- User Authentication Status -->
-<h1>My Angular project RecipeFE</h1>
-<br />
-
-<!-- Router Outlet for Navigating Pages -->
-<router-outlet />
+<main
+  class="flex-grow justify-center text-center container mx-auto px-4 py-8 bg-gray-100"
+>
+  <!-- Router Outlet for Navigating Pages -->
+  Bibbidi-Bobbidi-Boo, what's simmering in the stew? <br />
+  Tossed in a carrot, and a sock that’s new! <br />
+  A funny mix-up, but here's a clue, <br />
+  Cooking's an adventure,<br />
+  not a to-do!
+  <router-outlet />
+</main>
