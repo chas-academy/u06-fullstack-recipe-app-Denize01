@@ -34,7 +34,8 @@ export class AuthService {
   });
   loggedIn$ = this.loggedIn.asObservable();
 
-  private configUrl = 'https://u06-fullstack-recipe-app-denize01.onrender.com/api/';
+  private configUrl =
+    'https://u06-fullstack-recipe-app-denize01.onrender.com/api/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -122,6 +123,22 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
+
+  //För attt koppla backend?
+
+  // login(data: any) {
+  //   return this.http.post(
+  //     'https://u06-fullstack-recipe-app-denize01.onrender.com/api/login',
+  //     data
+  //   );
+  // }
+
+  // register(data: any) {
+  //   return this.http.post(
+  //     'https://u06-fullstack-recipe-app-denize01.onrender.com/api/register',
+  //     data
+  //   );
+  // }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 404) {
