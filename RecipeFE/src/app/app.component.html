@@ -1,63 +1,77 @@
-<nav>
-  <ul class="flex flex-row justify-around">
-    <!-- Recipe Search Link -->
-    <li>
+<!-- Navbar -->
+<nav class="bg-cyan-700 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a
+      routerLink="/home"
+      routerLinkActive="active"
+      aria-current="page"
+      class="px-3 py-2 rounded font-semibold"
+      >Hangry Hackers' Haven: A Welcome Byte!</a
+    >
+
+    <div>
+      <!-- Home Link -->
       <a
-        routerLink="/search"
+        routerLink="/home"
         routerLinkActive="active"
         aria-current="page"
-        class="hover:bg-gray-200"
-        >Recipe Search</a
+        class="px-3 py-2 rounded hover:bg-cyan-400"
+        >Home</a
       >
-    </li>
-
-    <!-- Profile Link -->
-    <!-- <li>
-      <a routerLink="/profile" routerLinkActive="active" aria-current="page"
+      <!-- Profile Link -->
+      <a
+        routerLink="/profile"
+        routerLinkActive="active"
+        aria-current="page"
+        class="px-3 py-2 rounded hover:bg-cyan-400"
         >Profile</a
       >
-    </li> -->
-
-    <!-- Login Link -->
-    <!-- <li>
-      <a routerLink="/login" routerLinkActive="active" aria-current="page"
+      <!-- Login Link -->
+      <a
+        routerLink="/login"
+        routerLinkActive="active"
+        aria-current="page"
+        class="px-3 py-2 rounded hover:bg-cyan-400"
         >Login</a
       >
-    </li> -->
-
-    <!-- Register Link -->
-    <!-- <li>
-      <a routerLink="/register" routerLinkActive="active" aria-current="page"
+      <!-- Register Link -->
+      <a
+        routerLink="/register"
+        routerLinkActive="active"
+        aria-current="page"
+        class="px-3 py-2 rounded hover:bg-cyan-400"
         >Register</a
       >
-    </li> -->
-
-    @if ((loggedIn$ | async)?.loginState) {
-    <li>Logged in as {{ (loggedIn$ | async)?.user?.name }}</li>
-    } @else {
-    <li>Not logged in</li>
-    }
-  </ul>
+    </div>
+  </div>
 </nav>
+
+<ul class="flex flex-row justify-around">
+  <!-- Recipe Search Link -->
+  <li>
+    <a
+      routerLink="/search"
+      routerLinkActive="active"
+      aria-current="page"
+      class="hover:bg-gray-200 font-semibold"
+      >Recipe Search</a
+    >
+  </li>
+  @if ((loggedIn$ | async)?.loginState) {
+  <li>Logged in as {{ (loggedIn$ | async)?.user?.name }}</li>
+  } @else {
+  <li>Not logged in</li>
+  }
+</ul>
 
 <main
   class="flex-grow justify-center text-center container mx-auto px-4 py-8 bg-gray-100"
 >
-  <!-- Router Outlet for Navigating Pages -->
-
-  Bibbidi-Bobbidi-Boo, in the code kitchen, we brew,<br />
-  Where logic is chopped, and bugs are few.<br />
-  Functions and arrays, in harmony blend,<br />
-  Algorithms bake, till golden in the end.<br /><br />
-
-  Debug and refactor, with a keen sight,<br />
-  Crafting code that runs just right.<br />
-  Where coding meets cooking, in a creative feast,<br />
-  In our digital cauldron, where tech and taste meet.<br /><br />
-
-  Chefs in their caps, or coders in their nooks,<br />
-  Here’s to smooth runs, free from hooks.<br />
-  With a magical chant, our work's complete,<br />
-  In this realm where code and cuisine sweetly greet.<br /><br />
   <router-outlet />
 </main>
+
+<footer class="bg-cyan-700 text-white p-4">
+  <div class="container mx-auto text-center">
+    © 2024 My RecipeApp U06. Chas Academy.
+  </div>
+</footer>

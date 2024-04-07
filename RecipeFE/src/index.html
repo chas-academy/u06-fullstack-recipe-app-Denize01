@@ -2,53 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RecipeApp U06</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Include Tailwind CSS from CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
-  <body class="flex flex-col min-h-screen">
-    <!-- Navbar -->
-    <nav class="bg-cyan-700 text-white p-4">
-      <div class="container mx-auto flex justify-between items-center">
-        <a href="./index.html" class="text-lg font-semibold">
-          Find what makes your tummy happy!</a
-        >
-        <div>
-          <a href="./index.html" class="px-3 py-2 rounded hover:bg-cyan-400"
-            >Home</a
-          >
-          <!-- <a href="/login" class="px-3 py-2 rounded hover:bg-gray-700"
-            >Profile</a
-          > -->
-          <a href="/login" class="px-3 py-2 rounded hover:bg-cyan-400">Login</a>
-
-          <a href="/register" class="px-3 py-2 rounded hover:bg-cyan-400"
-            >Register</a
-          >
-        </div>
-      </div>
-    </nav>
-    <app-root></app-root>
-
-    <!-- Main content -->
-    <main class="flex-grow container mx-auto px-4 py-8 bg-gray-100">
-      <h1 class="text-3xl font-bold"></h1>
-      <br /><br />
-      <!-- 
-      <a href="/search" class="px-3 py-2 rounded hover:bg-gray-200"
-        >Sök på recept!</a
-      > -->
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-cyan-700 text-white p-4">
-      <div class="container mx-auto text-center">
-        © 2024 My RecipeApp U06. Chas Academy.
-      </div>
-    </footer>
+  <body>
+    <app-root> </app-root>
   </body>
 </html>

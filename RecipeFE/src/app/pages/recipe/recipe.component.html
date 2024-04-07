@@ -1,8 +1,37 @@
-<br /><br />
-<p class="flex justify-center">This is where the magic happens!</p>
-<br /><br />
+<div class="flex flex-col items-center my-8">
+  <p class="text-lg font-medium text-gray-700">
+    This is where the magic happens!
+  </p>
 
-@if (recipe) {
+  <div
+    class="mt-6 w-full max-w-md bg-white shadow-lg overflow-hidden rounded-lg"
+  >
+    <h2
+      class="bg-gray-100 text-xl font-semibold underline text-gray-800 py-4 px-6"
+    >
+      {{ recipe.recipe.label }}
+    </h2>
+    <img
+      class="w-full"
+      src="{{ recipe.recipe.images.SMALL.url }}"
+      alt="Recipe image"
+    />
+    <div class="p-6">
+      <p class="text-sm font-semibold text-gray-700 mb-4">
+        Total time: {{ recipe.recipe.totalTime }} minutes
+      </p>
+      <p class="font-semibold text-gray-700 mb-2">This is what you need:</p>
+      <ul class="list-disc list-inside space-y-1">
+        @for (ingredientLine of recipe.recipe.ingredientLines; track
+        ingredientLine) {
+        <li class="text-sm text-gray-600">{{ ingredientLine }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- @if (recipe) {
 <div class="shadow overflow-hidden rounded-lg">
   <h2 class="underline">{{ recipe.recipe.label }}</h2>
   <img src="{{ recipe.recipe.images.SMALL.url }}" alt="Recipe image" />
@@ -15,4 +44,4 @@
 </div>
 } @else {
 <p>Loading recipe...</p>
-}
+} -->
