@@ -41,4 +41,8 @@ export class AppComponent {
 
     this.loggedIn$ = this.auth.loggedIn$;
   }
+
+  logout() {
+    this.auth.logOut();
+  }
 }

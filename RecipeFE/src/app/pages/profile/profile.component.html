@@ -1,14 +1,13 @@
-<p>profile works!</p>
+<div class="min-h-screen">
+  <p>profile works!</p>
 
-@if (currentUser$ | async; as currentUser) {
-<div>
+  @if (currentUser$ | async; as currentUser) {
   <p>{{ currentUser.name }}</p>
   <p>{{ currentUser.email }}</p>
+  } @else {
+  <p>Loading...</p>
+  }
 </div>
-} @else {
-<p>Loading...</p>
-}
-
 <!-- <button
         (click)="(logout)"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
