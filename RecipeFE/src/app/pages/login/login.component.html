@@ -1,7 +1,7 @@
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
   <div class="p-8 bg-white shadow-md rounded-lg max-w-md w-full">
     <br /><br />
-    <form class="space-y-4 mt-4" method="post">
+    <form class="space-y-4 mt-4" name="loginform" [formGroup]="loginForm">
       <p>Log in below to see your profile! 😊</p>
       <br /><br />
       <div class="mb-4">
@@ -11,9 +11,9 @@
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="email"
-          type="text"
-          placeholder="Email"
-          name="email"
+          type="email"
+          placeholder="Enter email"
+          formControlName="email"
           required
         />
       </div>
@@ -29,24 +29,17 @@
           id="password"
           type="password"
           placeholder="**********"
-          name="password"
+          formControlName="password"
           required
         />
       </div>
       <div class="flex items-center justify-between">
         <button
-          (click)="(login)"
+          (click)="login(); submitLogin()"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Log In
         </button>
-
-        <!-- <button
-        (click)="(logout)"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >
-        Log out
-      </button> -->
       </div>
     </form>
   </div>

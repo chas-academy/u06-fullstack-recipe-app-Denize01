@@ -12,6 +12,7 @@ import {
   catchError,
   throwError,
   map,
+  tap,
 } from 'rxjs';
 import { User } from '../interfaces/user';
 import { LoggedInUser } from '../interfaces/logged-in-user';
@@ -22,11 +23,11 @@ import { Registerdetails } from '../interfaces/registerdetails';
   providedIn: 'root',
 })
 export class AuthService {
-  private registered = new BehaviorSubject<RegisteredUser>({
-    user: undefined,
-    registeredState: false,
-  });
-  registered$ = this.registered.asObservable();
+  // private registered = new BehaviorSubject<RegisteredUser>({
+  //   user: undefined,
+  //   registeredState: false,
+  // });
+  // registered$ = this.registered.asObservable();
 
   private loggedIn = new BehaviorSubject<LoggedInUser>({
     user: undefined,
@@ -45,28 +46,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  registeredUserState(registeredState: RegisteredUser) {
-    this.registered.next(registeredState);
-  }
-
-  registerNewUser(registerdetails: Registerdetails) {
-    this.http
-      .post<any>(this.configUrl + 'register', registerdetails, this.httpOptions)
-      .pipe(catchError(this.handleError))
-      .subscribe((result) => {
-        console.log(result);
-        this.registeredUserState({
-          user: result.user,
-          registeredState: true,
-        });
-
-        this.httpOptions.headers = this.httpOptions.headers.set(
-          'Authorization',
-          'Bearer ' + result.token
-        );
-      });
-  }
-
   private updateLoginState(loginState: LoggedInUser) {
     this.loggedIn.next(loginState);
   }
@@ -74,21 +53,23 @@ export class AuthService {
     return this.loggedIn.value.loginState;
   }
 
-  loginUser(loginDetails: LoginDetails) {
-    this.http
+  loginUser(loginDetails: LoginDetails): Observable<any> {
+    return this.http
       .post<any>(this.configUrl + 'login', loginDetails, this.httpOptions)
-      .pipe(catchError(this.handleError))
-      .subscribe((result) => {
-        console.log(result);
-        this.updateLoginState({
-          user: result.user,
-          loginState: true,
-        });
-        this.httpOptions.headers = this.httpOptions.headers.set(
-          'Authorization',
-          'Bearer ' + result.token
-        );
-      });
+      .pipe(
+        catchError(this.handleError),
+        tap((result) => {
+          console.log(result);
+          this.updateLoginState({
+            user: result.user,
+            loginState: true,
+          });
+          this.httpOptions.headers = this.httpOptions.headers.set(
+            'Authorization',
+            'Bearer ' + result.token
+          );
+        })
+      );
   }
 
   logOut() {
@@ -124,21 +105,12 @@ export class AuthService {
       );
   }
 
-  //För attt koppla backend?
-
-  // login(data: any) {
-  //   return this.http.post(
-  //     'https://u06-fullstack-recipe-app-denize01.onrender.com/api/login',
-  //     data
-  //   );
-  // }
-
-  // register(data: any) {
-  //   return this.http.post(
-  //     'https://u06-fullstack-recipe-app-denize01.onrender.com/api/register',
-  //     data
-  //   );
-  // }
+  register(data: any) {
+    return this.http.post(
+      'https://u06-fullstack-recipe-app-denize01.onrender.com/api/register',
+      data
+    );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 404) {

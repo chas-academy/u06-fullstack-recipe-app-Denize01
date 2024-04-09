@@ -27,3 +27,29 @@
   to get cookin! Not sure what to cook? Take a look at our suggestions:
 </p>
 <!-- <p>home works!</p> -->
+
+<div
+  class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+>
+  @for (recipe of recipes; track recipe ) {
+  <article class="bg-blue-100 border-2 shadow-lg rounded-t-lg border-sky-600">
+    <h3 class="font-sans text-lg font-semibold underline">
+      {{ recipe.label }}
+    </h3>
+    <img src="{{ recipe.image }}" alt="Recipe image" />
+    <p>Total time: {{ recipe.totalTime }}</p>
+
+    <ul>
+      <p>
+        <a
+          [routerLink]="['/recipe', recipe.selfref | recipeidformatter]"
+          class="flex justify-center bg-cyan-700 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mt-4 mb-0.5"
+          >Go to this recipe!</a
+        >
+      </p>
+    </ul>
+  </article>
+  } @empty {
+  <p>There are no chosen recipes.</p>
+  }
+</div>

@@ -6,6 +6,8 @@ import { User } from './interfaces/user';
 import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { LoggedInUser } from './interfaces/logged-in-user';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,8 @@ import { LoggedInUser } from './interfaces/logged-in-user';
     RouterLink,
     RouterLinkActive,
     AsyncPipe,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

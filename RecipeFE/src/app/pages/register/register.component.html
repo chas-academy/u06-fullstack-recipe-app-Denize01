@@ -3,7 +3,11 @@
     <p>New here? Register below! 😊</p>
     <br /><br />
 
-    <form action="/registerUser" method="POST">
+    <form
+      name="registerUser"
+      [formGroup]="registerDetails"
+      (ngSubmit)="registerUser()"
+    >
       <div class="mx-auto px-4">
         <p>Please fill in this form to create an account.</p>
 
@@ -13,7 +17,7 @@
             <input
               type="text"
               placeholder="Enter Name"
-              name="name"
+              formControlName="name"
               id="name"
               required
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -27,7 +31,7 @@
             <input
               type="email"
               placeholder="Enter Email"
-              name="email"
+              formControlName="email"
               id="email"
               required
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -35,28 +39,30 @@
           </div>
 
           <div>
-            <label for="psw" class="block text-sm font-bold mb-2"
+            <label for="password" class="block text-sm font-bold mb-2"
               >Password:</label
             >
             <input
               type="password"
               placeholder="Enter Password"
-              name="psw"
-              id="psw"
+              formControlName="password"
+              id="password"
               required
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
           <div>
-            <label for="psw-repeat" class="block text-sm font-bold mb-2"
+            <label
+              for="password_confirmation"
+              class="block text-sm font-bold mb-2"
               >Repeat Password:</label
             >
             <input
               type="password"
               placeholder="Repeat Password"
-              name="psw-repeat"
-              id="psw-repeat"
+              formControlName="password_confirmation"
+              id="password_confirmation"
               required
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -75,8 +81,10 @@
             >Terms & Conditions</a
           >.
         </p>
+
         <button
-          (click)="(registerUser)"
+          type="submit"
+          [disabled]="!registerDetails.valid"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-lg w-full mt-4"
         >
           Register
